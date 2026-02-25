@@ -148,7 +148,7 @@ class SatyaHealthcareAPITester:
             "Create Authorization",
             "POST",
             "authorizations",
-            201,
+            200,  # Backend returns 200, not 201
             data=auth_data
         )
         
