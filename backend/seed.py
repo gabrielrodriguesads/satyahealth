@@ -113,39 +113,45 @@ async def seed_database():
     
     print("Created users")
     
-    # Create providers
-    specialties = ["Cardiologia", "Ortopedia", "Oftalmologia", "Neurologia", "Oncologia"]
-    cities = ["São Paulo", "Rio de Janeiro", "Belo Horizonte", "Curitiba", "Porto Alegre"]
-    states = {"São Paulo": "SP", "Rio de Janeiro": "RJ", "Belo Horizonte": "MG", "Curitiba": "PR", "Porto Alegre": "RS"}
+    # Create providers - Multiple providers per specialty/city combination for better recommendations
+    specialties = ["Cardiologia", "Ortopedia", "Oftalmologia"]
+    cities = ["São Paulo", "Rio de Janeiro"]
+    states = {"São Paulo": "SP", "Rio de Janeiro": "RJ"}
     
-    provider_names = [
-        "Hospital São Paulo", "Clínica Paulista", "Instituto Cardio", "Centro Médico Saúde",
-        "Hospital Albert Einstein", "Clínica Santa Cruz", "Hospital Sírio-Libanês", "Centro Ortopédico",
-        "Instituto de Oftalmologia", "Hospital das Clínicas", "Centro Neurológico", "Hospital do Câncer",
-        "Clínica Integrada", "Hospital Metropolitano", "Centro de Diagnósticos"
+    provider_templates = [
+        "Hospital", "Clínica", "Centro Médico", "Instituto", "Ambulatório"
     ]
     
     providers = []
-    for i, name in enumerate(provider_names):
-        city = random.choice(cities)
-        provider = {
-            "id": f"provider-{i+1:03d}",
-            "tenant_id": "demo-tenant-001",
-            "name": name,
-            "cnpj": f"{10+i}.000.000/0001-{i:02d}",
-            "specialty": specialties[i % len(specialties)],
-            "city": city,
-            "state": states[city],
-            "address": f"Av. Principal, {100 + i * 10}",
-            "phone": f"(11) 9{random.randint(1000, 9999)}-{random.randint(1000, 9999)}",
-            "is_eligible": random.random() > 0.2,  # 80% eligible
-            "quality_score": round(random.uniform(6, 10), 1),
-            "average_cost": round(random.uniform(1000, 5000), 2),
-            "total_cases": random.randint(50, 500),
-            "created_at": datetime.now(timezone.utc).isoformat(),
-            "updated_at": datetime.now(timezone.utc).isoformat()
-        }
-        providers.append(provider)
+    provider_counter = 0
+    
+    # Create 3-4 providers for each specialty/city combination
+    for specialty in specialties:
+        for city in cities:
+            num_providers = random.randint(3, 4)
+            for i in range(num_providers):
+                provider_counter += 1
+                template = provider_templates[i % len(provider_templates)]
+                name = f"{template} {specialty.split()[0]} {city.split()[0]} {i+1}"
+                
+                provider = {
+                    "id": f"provider-{provider_counter:03d}",
+                    "tenant_id": "demo-tenant-001",
+                    "name": name,
+                    "cnpj": f"{10+provider_counter}.{100+i}.000/0001-{provider_counter:02d}",
+                    "specialty": specialty,
+                    "city": city,
+                    "state": states[city],
+                    "address": f"Av. Principal, {100 + provider_counter * 10}",
+                    "phone": f"(11) 9{random.randint(1000, 9999)}-{random.randint(1000, 9999)}",
+                    "is_eligible": True,  # All providers eligible for demo
+                    "quality_score": round(random.uniform(6.5, 9.5), 1),
+                    "average_cost": round(random.uniform(1000, 4000), 2),
+                    "total_cases": random.randint(50, 200),
+                    "created_at": datetime.now(timezone.utc).isoformat(),
+                    "updated_at": datetime.now(timezone.utc).isoformat()
+                }
+                providers.append(provider)
     
     await db.providers.insert_many(providers)
     print(f"Created {len(providers)} providers")
