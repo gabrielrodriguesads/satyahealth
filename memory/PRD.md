@@ -34,6 +34,17 @@ Sistema Inteligente de Indicação de Rede para Operadoras de Saúde - SaaS mult
 - [x] Dashboard with economy charts
 - [x] Authorizations management (list, create, generate recommendation)
 - [x] Recommendations list and detail view with provider cards
+- [x] **NEW: Side-by-side provider comparison feature**
+  - Checkbox selection for up to 4 providers
+  - Floating comparison bar with quick actions
+  - Full comparison sheet with metrics:
+    - Cost comparison with best/worst indicators
+    - Savings comparison with percentage
+    - Cases count with progress bars
+    - Quality score with star ratings
+    - Eligibility status
+  - AI recommendation summary
+  - Direct selection from comparison view
 - [x] Providers management with eligibility toggle
 - [x] Tenants management (Satya Admin only)
 - [x] Users management
@@ -44,8 +55,8 @@ Sistema Inteligente de Indicação de Rede para Operadoras de Saúde - SaaS mult
 
 ### Database Seed
 - Demo tenant: "Operadora Saúde Total"
-- 15 providers across specialties
-- 200 historical paid claims
+- 21 providers (3-4 per specialty/city)
+- 452 historical paid claims
 - 20 authorizations
 
 ## Login Credentials
