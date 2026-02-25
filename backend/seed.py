@@ -150,7 +150,7 @@ async def seed_database():
     await db.providers.insert_many(providers)
     print(f"Created {len(providers)} providers")
     
-    # Create claims paid (historical data)
+    # Create claims paid (historical data) - ensure sufficient data per provider/specialty/city
     procedures = [
         ("10101012", "Consulta em consultório"),
         ("20201014", "Eletrocardiograma"),
@@ -162,43 +162,50 @@ async def seed_database():
     plans = [("PLAN001", "Plano Básico"), ("PLAN002", "Plano Plus"), ("PLAN003", "Plano Premium")]
     
     claims = []
-    for i in range(200):
-        provider = random.choice(providers)
-        procedure = random.choice(procedures)
-        plan = random.choice(plans)
+    claim_counter = 0
+    
+    # Create at least 15 claims per provider to ensure min_cases threshold (10) is met
+    for provider in providers:
+        num_claims = random.randint(15, 30)  # Each provider gets 15-30 claims
+        base_cost = random.uniform(800, 2500)  # Base cost varies by provider
         
-        base_cost = random.uniform(500, 3000)
-        variation = random.uniform(0.8, 1.2)
-        paid = round(base_cost * variation, 2)
-        gloss = round(random.uniform(0, paid * 0.1), 2) if random.random() > 0.7 else 0
-        
-        claim = {
-            "id": f"claim-{i+1:04d}",
-            "tenant_id": "demo-tenant-001",
-            "claim_number": f"CLM{2024}{i+1:05d}",
-            "provider_id": provider["id"],
-            "beneficiary_hash": hashlib.sha256(f"BEN{i}".encode()).hexdigest()[:16],
-            "plan_code": plan[0],
-            "plan_name": plan[1],
-            "specialty": provider["specialty"],
-            "city": provider["city"],
-            "state": provider["state"],
-            "items": [{
-                "procedure_code": procedure[0],
-                "procedure_name": procedure[1],
-                "quantity": 1,
-                "authorized_value": paid + gloss,
-                "paid_value": paid,
-                "gloss_value": gloss
-            }],
-            "total_authorized": paid + gloss,
-            "total_paid": paid,
-            "total_gloss": gloss,
-            "payment_date": (datetime.now(timezone.utc) - timedelta(days=random.randint(1, 365))).isoformat(),
-            "service_date": (datetime.now(timezone.utc) - timedelta(days=random.randint(1, 365))).isoformat(),
-            "created_at": datetime.now(timezone.utc).isoformat()
-        }
-        claims.append(claim)
+        for j in range(num_claims):
+            claim_counter += 1
+            procedure = random.choice(procedures)
+            plan = random.choice(plans)
+            
+            # Add some variation to cost
+            variation = random.uniform(0.85, 1.15)
+            paid = round(base_cost * variation, 2)
+            gloss = round(random.uniform(0, paid * 0.08), 2) if random.random() > 0.75 else 0
+            
+            claim = {
+                "id": f"claim-{claim_counter:04d}",
+                "tenant_id": "demo-tenant-001",
+                "claim_number": f"CLM{2024}{claim_counter:05d}",
+                "provider_id": provider["id"],
+                "beneficiary_hash": hashlib.sha256(f"BEN{claim_counter}".encode()).hexdigest()[:16],
+                "plan_code": plan[0],
+                "plan_name": plan[1],
+                "specialty": provider["specialty"],
+                "city": provider["city"],
+                "state": provider["state"],
+                "items": [{
+                    "procedure_code": procedure[0],
+                    "procedure_name": procedure[1],
+                    "quantity": 1,
+                    "authorized_value": paid + gloss,
+                    "paid_value": paid,
+                    "gloss_value": gloss
+                }],
+                "total_authorized": paid + gloss,
+                "total_paid": paid,
+                "total_gloss": gloss,
+                "payment_date": (datetime.now(timezone.utc) - timedelta(days=random.randint(1, 300))).isoformat(),
+                "service_date": (datetime.now(timezone.utc) - timedelta(days=random.randint(1, 300))).isoformat(),
+                "created_at": datetime.now(timezone.utc).isoformat()
+            }
+            claims.append(claim)
     
     await db.claims_paid.insert_many(claims)
     print(f"Created {len(claims)} paid claims")
