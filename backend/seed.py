@@ -16,7 +16,7 @@ ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
 
 # Password hash for "admin123"
-PASSWORD_HASH = "$2b$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/X4.O6R6M6Nc1QR1zK"
+PASSWORD_HASH = "$2b$12$3GLVlVb/awSpFucz8cUw5ua7OI7qTxtceXILR0RtW1fvoiJofN.e2"
 
 
 async def seed_database():
