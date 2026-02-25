@@ -1,0 +1,185 @@
+{
+  "identity": {
+    "name": "E1",
+    "archetype": "The Clinical Precision (Light)",
+    "mission": "Create a trustworthy, high-clarity SaaS for healthcare cost intelligence."
+  },
+  "typography": {
+    "font_family": {
+      "headings": "Manrope, sans-serif",
+      "body": "Inter, sans-serif",
+      "mono": "JetBrains Mono, monospace"
+    },
+    "scale": {
+      "h1": "text-4xl font-bold tracking-tight text-slate-900",
+      "h2": "text-3xl font-semibold tracking-tight text-slate-900",
+      "h3": "text-2xl font-semibold tracking-tight text-slate-800",
+      "h4": "text-xl font-medium text-slate-800",
+      "body_lg": "text-lg leading-relaxed text-slate-600",
+      "body": "text-base leading-relaxed text-slate-600",
+      "small": "text-sm font-medium text-slate-500",
+      "tiny": "text-xs font-semibold uppercase tracking-wider text-slate-400"
+    },
+    "imports": [
+      "@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');"
+    ]
+  },
+  "colors": {
+    "palette": {
+      "primary": {
+        "DEFAULT": "#0F172A",
+        "foreground": "#F8FAFC",
+        "hover": "#1E293B",
+        "description": "Deep Slate - Authority & Trust"
+      },
+      "secondary": {
+        "DEFAULT": "#0891B2",
+        "foreground": "#FFFFFF",
+        "hover": "#0E7490",
+        "description": "Clinical Cyan - Cleanliness & Technology"
+      },
+      "accent": {
+        "DEFAULT": "#10B981",
+        "foreground": "#FFFFFF",
+        "description": "Emerald - Cost Savings & Eligibility"
+      },
+      "destructive": {
+        "DEFAULT": "#E11D48",
+        "foreground": "#FFFFFF",
+        "description": "Rose - High Cost & Ineligible"
+      },
+      "background": {
+        "DEFAULT": "#F8FAFC",
+        "paper": "#FFFFFF",
+        "subtle": "#F1F5F9"
+      },
+      "border": {
+        "DEFAULT": "#E2E8F0",
+        "subtle": "#F1F5F9",
+        "focus": "#94A3B8"
+      }
+    },
+    "gradients": {
+      "subtle_fade": "bg-gradient-to-b from-white to-slate-50",
+      "glow_accent": "bg-gradient-to-r from-cyan-500/10 to-blue-500/10",
+      "glass_surface": "bg-white/70 backdrop-blur-md border border-white/20 shadow-sm"
+    }
+  },
+  "layout": {
+    "spacing_scale": {
+      "section_gap": "gap-12 md:gap-16 lg:gap-24",
+      "card_padding": "p-6 md:p-8",
+      "container_padding": "px-4 md:px-8 lg:px-12"
+    },
+    "grid_systems": {
+      "dashboard": "grid grid-cols-1 md:grid-cols-12 gap-6",
+      "bento_provider": "col-span-12 md:col-span-4 row-span-2",
+      "bento_chart": "col-span-12 md:col-span-8 row-span-2",
+      "bento_stat": "col-span-6 md:col-span-3"
+    },
+    "containers": {
+      "main": "max-w-7xl mx-auto w-full",
+      "narrow": "max-w-3xl mx-auto w-full"
+    }
+  },
+  "components": {
+    "buttons": {
+      "primary": "bg-slate-900 text-white hover:bg-slate-800 shadow-sm rounded-md px-6 py-2.5 font-medium transition-all active:scale-95",
+      "secondary": "bg-white text-slate-700 border border-slate-200 hover:bg-slate-50 shadow-sm rounded-md px-6 py-2.5 font-medium transition-all",
+      "ghost": "text-slate-600 hover:bg-slate-100 hover:text-slate-900 rounded-md px-4 py-2 transition-colors",
+      "destructive": "bg-rose-50 text-rose-600 hover:bg-rose-100 hover:text-rose-700 rounded-md px-6 py-2.5 font-medium transition-colors"
+    },
+    "cards": {
+      "base": "bg-white rounded-lg border border-slate-200 shadow-sm hover:shadow-md transition-shadow duration-200",
+      "interactive": "cursor-pointer hover:border-cyan-500/50 hover:ring-1 hover:ring-cyan-500/20"
+    },
+    "inputs": {
+      "base": "flex h-10 w-full rounded-md border border-slate-200 bg-white px-3 py-2 text-sm ring-offset-white file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-slate-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+    },
+    "badges": {
+      "success": "inline-flex items-center rounded-full border border-emerald-200 bg-emerald-50 px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:ring-offset-2 text-emerald-700",
+      "warning": "inline-flex items-center rounded-full border border-amber-200 bg-amber-50 px-2.5 py-0.5 text-xs font-semibold transition-colors text-amber-700",
+      "neutral": "inline-flex items-center rounded-full border border-slate-200 bg-slate-50 px-2.5 py-0.5 text-xs font-semibold transition-colors text-slate-600"
+    }
+  },
+  "visual_enhancers": {
+    "shadows": {
+      "soft": "shadow-[0_2px_8px_rgba(0,0,0,0.04)]",
+      "medium": "shadow-[0_4px_16px_rgba(0,0,0,0.08)]",
+      "floating": "shadow-[0_8px_30px_rgba(0,0,0,0.12)]"
+    },
+    "borders": {
+      "subtle": "border border-slate-100",
+      "defined": "border border-slate-200"
+    },
+    "glass": {
+      "header": "bg-white/80 backdrop-blur-md border-b border-slate-200/50"
+    }
+  },
+  "motion": {
+    "transitions": {
+      "fast": "duration-150 ease-out",
+      "normal": "duration-300 ease-in-out",
+      "slow": "duration-500 ease-in-out"
+    },
+    "animations": {
+      "fade_in": "animate-in fade-in duration-500",
+      "slide_up": "animate-in slide-in-from-bottom-4 fade-in duration-500",
+      "scale_in": "animate-in zoom-in-95 fade-in duration-300"
+    }
+  },
+  "assets": {
+    "icons": {
+      "library": "lucide-react",
+      "style": "stroke-width={1.5} className='text-slate-500'"
+    },
+    "images": {
+      "login_bg": {
+        "url": "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?crop=entropy&cs=srgb&fm=jpg&q=85",
+        "alt": "Modern clean medical office abstract",
+        "category": "background"
+      },
+      "empty_state": {
+        "url": "https://images.unsplash.com/photo-1771574204208-b47e2d863bc5?crop=entropy&cs=srgb&fm=jpg&q=85",
+        "alt": "Empty waiting room",
+        "category": "illustration"
+      },
+      "avatars": [
+        {
+          "url": "https://images.unsplash.com/photo-1645066928295-2506defde470?crop=entropy&cs=srgb&fm=jpg&q=85",
+          "alt": "Male Doctor",
+          "category": "avatar"
+        },
+        {
+          "url": "https://images.pexels.com/photos/33055498/pexels-photo-33055498.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+          "alt": "Female Doctor",
+          "category": "avatar"
+        }
+      ]
+    }
+  },
+  "component_instructions": {
+    "ProviderCard": {
+      "instruction": "Create a horizontal card. Left: Avatar + Name + Specialty. Middle: 3 columns for Cost (display as bar chart/meter), Distance, Eligibility Badge. Right: 'Select' button. Highlight 'Savings' in Green.",
+      "path": "src/components/domain/ProviderCard.js"
+    },
+    "CostChart": {
+      "instruction": "Use Recharts. Area chart with gradient fill. Tooltip must be custom styled (glassmorphism). Axis lines should be subtle (slate-200).",
+      "path": "src/components/domain/CostChart.js"
+    },
+    "Layout": {
+      "instruction": "Sidebar navigation with collapsible state. Header with breadcrumbs and user profile. Main content area with max-width constraint for readability.",
+      "path": "src/components/layout/DashboardLayout.js"
+    }
+  },
+  "universal_guidelines": [
+    "Use 'sonner' for all toast notifications.",
+    "Ensure all interactive elements have data-testid attributes (kebab-case).",
+    "Do not use generic HTML inputs; use Shadcn Input, Select, Checkbox.",
+    "Images must have alt text.",
+    "Use 'Manrope' for all headings and 'Inter' for body text.",
+    "Theme is predominantly light/white. Dark mode should be slate-900 based, not pure black.",
+    "Validation errors should be red-500 with clear text below inputs.",
+    "Loading states must use skeletons (shadcn/skeleton), not spinners for page loads."
+  ]
+}
