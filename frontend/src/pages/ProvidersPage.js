@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { providersAPI } from '../../lib/api';
+import { providersAPI } from '../lib/api';
 import DashboardLayout from '../components/layout/DashboardLayout';
 import { Card, CardContent } from '../components/ui/card';
 import { Button } from '../components/ui/button';
