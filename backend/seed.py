@@ -210,13 +210,13 @@ async def seed_database():
     await db.claims_paid.insert_many(claims)
     print(f"Created {len(claims)} paid claims")
     
-    # Create authorizations
+    # Create authorizations - ensure they match existing provider specialties/cities for recommendation engine
     authorizations = []
     for i in range(20):
+        # Pick a provider to base the authorization on - this ensures matching specialty/city/plan
+        base_provider = providers[i % len(providers)]
         procedure = random.choice(procedures)
         plan = random.choice(plans)
-        city = random.choice(cities)
-        specialty = random.choice(specialties)
         
         auth = {
             "id": f"auth-{i+1:04d}",
@@ -226,18 +226,18 @@ async def seed_database():
             "beneficiary_name_hash": hashlib.sha256(f"NAME{i}".encode()).hexdigest()[:16],
             "plan_code": plan[0],
             "plan_name": plan[1],
-            "specialty": specialty,
-            "city": city,
-            "state": states[city],
+            "specialty": base_provider["specialty"],  # Match provider specialty
+            "city": base_provider["city"],  # Match provider city
+            "state": base_provider["state"],
             "items": [{
                 "procedure_code": procedure[0],
                 "procedure_name": procedure[1],
                 "quantity": 1,
-                "unit_price": round(random.uniform(500, 2000), 2),
-                "total_price": round(random.uniform(500, 2000), 2)
+                "unit_price": round(random.uniform(1500, 4000), 2),
+                "total_price": round(random.uniform(1500, 4000), 2)
             }],
-            "status": random.choice(["pending", "pending", "pending", "recommended"]),
-            "estimated_cost": round(random.uniform(1000, 5000), 2),
+            "status": "pending",  # All start as pending
+            "estimated_cost": round(random.uniform(2000, 5000), 2),
             "created_by": "operator-user-001",
             "created_at": (datetime.now(timezone.utc) - timedelta(days=random.randint(0, 30))).isoformat(),
             "updated_at": datetime.now(timezone.utc).isoformat()
