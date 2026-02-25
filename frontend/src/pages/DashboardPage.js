@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { dashboardAPI } from '../../lib/api';
-import DashboardLayout from '../../components/layout/DashboardLayout';
-import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
-import { Skeleton } from '../ui/skeleton';
-import { Badge } from '../ui/badge';
+import DashboardLayout from '../components/layout/DashboardLayout';
+import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
+import { Skeleton } from '../components/ui/skeleton';
+import { Badge } from '../components/ui/badge';
 import { 
   TrendingUp, 
   TrendingDown,
