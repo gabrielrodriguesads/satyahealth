@@ -247,15 +247,15 @@ async def seed_database():
     await db.authorizations.insert_many(authorizations)
     print(f"Created {len(authorizations)} authorizations")
     
-    # Create tenant config
+    # Create tenant config with relaxed settings for demo
     tenant_config = {
         "id": "config-001",
         "tenant_id": "demo-tenant-001",
         "similarity_config": {
-            "same_procedure": True,
+            "same_procedure": False,  # Relaxed - don't require exact procedure match
             "same_specialty": True,
             "same_city": True,
-            "same_plan": True,
+            "same_plan": False,  # Relaxed - don't require exact plan match
             "time_window_months": 12,
             "procedure_weight": 0.4,
             "specialty_weight": 0.2,
@@ -265,7 +265,7 @@ async def seed_database():
         "cost_config": {
             "calculation_method": "median",
             "time_window_months": 12,
-            "min_cases": 10,
+            "min_cases": 5,  # Lower threshold for demo
             "outlier_removal": True,
             "outlier_percentile": 5.0
         },
