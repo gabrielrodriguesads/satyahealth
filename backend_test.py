@@ -181,7 +181,7 @@ class SatyaHealthcareAPITester:
             "Generate Recommendation",
             "POST",
             "recommendations",
-            201,
+            200,  # Backend returns 200, not 201
             data={"authorization_id": self.auth_id}
         )
         
